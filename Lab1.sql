@@ -11,8 +11,8 @@ CREATE TABLE Airline_info (
 CREATE TABLE Airport (
                          airport_id INT PRIMARY KEY,
                          airport_name VARCHAR(50) NOT NULL,
-                         arriving_airport_id INT PRIMARY KEY,
-                         departing_airport_id INT PRIMARY KEY,
+                         arriving_airport_id INT,
+                         departing_airport_id INT,
                          country VARCHAR(50) NOT NULL,
                          state VARCHAR(50),
                          city VARCHAR(50),
@@ -252,7 +252,7 @@ insert into Airline (airline_name, airline_country) values ('Von-Durgan', 'Indon
 
 
 --3
-INSERT INTO Airline (airline_name, airline_country) VALUES ('KazAir', 'Kazakhstan');
+INSERT INTO Airline (airline_id,airline_name, airline_country) VALUES (21001,'KazAir', 'Kazakhstan');
 --4
 UPDATE Airline SET airline_country = 'Turkey' WHERE airline_country = 'Kazakhstan';
 --5
@@ -264,6 +264,30 @@ DELETE FROM Flights
 WHERE sch_arrival_time >= '2024-01-01 00:00:00'
   AND sch_arrival_time < '2025-01-01 00:00:00';
 --8
-UPDATE Booking SET price = price * 1.1;
+UPDATE Booking SET ticket_price = ticket_price * 1.1;
 --9
-DELETE FROM Booking WHERE price <= 1000;
+DELETE FROM Booking WHERE ticket_price <= 1000;
+
+
+--Lab3
+
+--1
+SELECT * FROM Passengers WHERE first_name == last_name;
+--2
+SELECT DISTINCT last_name FROM Passengers;
+--3
+SELECT * FROM Passengers WHERE gender == 'Male' AND date_of_birth BETWEEN 1990 AND 2000;
+--4
+SELECT * FROM Booking ORDER BY price;
+--5
+SELECT * FROM Flights WHERE arriving_airport_id == 122134; --IDK what is China airport ids
+--6
+SELECT * FROM Airline WHERE airline_country == 'Kazakhstan';
+--7
+UPDATE Booking SET ticket_price = ticket_price *0.9 WHERE created_at < '12-12-2010';
+--8
+SELECT * FROM Baggage WHERE  weight_in_kg >= 25 ORDER BY weight_in_kg LIMIT 3;
+--9
+SELECT first_name and last_name FROM Passengers ORDER BY date_of_birth DESC LIMIT 1;
+--10
+SELECT * FROM booking ORDER BY ticket_price;
